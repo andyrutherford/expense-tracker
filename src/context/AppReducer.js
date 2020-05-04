@@ -1,5 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
+    case 'CREATE_TRANSACTION':
+      return {
+        ...state,
+        transactions: [...state.transactions, action.payload],
+      };
     case 'DELETE_TRANSACTION':
       return {
         ...state,
