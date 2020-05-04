@@ -1,5 +1,11 @@
 export default (state, action) => {
   switch (action.type) {
+    case 'GET_TRANSACTIONS':
+      return {
+        ...state,
+        loading: false,
+        transactions: action.payload,
+      };
     case 'CREATE_TRANSACTION':
       return {
         ...state,
@@ -11,6 +17,11 @@ export default (state, action) => {
         transactions: state.transactions.filter(
           (transaction) => transaction.id !== action.payload
         ),
+      };
+    case 'TRANSACTION_ERROR':
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
