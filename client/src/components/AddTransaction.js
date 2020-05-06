@@ -1,25 +1,46 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
+  const [editMode, setEditMode] = useState(false);
 
   const context = useContext(GlobalContext);
+  const { current } = context;
 
   const createTransactionHandler = (e) => {
     e.preventDefault();
-    const newTransaction = {
-      id: Math.floor(Math.random() * 10000000),
-      text,
-      amount: parseInt(amount),
-    };
-    context.createTransaction(newTransaction);
+
+    if (editMode) {
+      const updates = { text, amount };
+      context.editTransaction(current, updates);
+      setEditMode(false);
+    } else {
+      const newTransaction = {
+        id: Math.floor(Math.random() * 10000000),
+        text,
+        amount: parseInt(amount),
+      };
+      context.createTransaction(newTransaction);
+      setEditMode(false);
+    }
+
+    setText('');
+    setAmount(0);
   };
+
+  useEffect(() => {
+    if (current) {
+      setEditMode(true);
+      setText(current.text);
+      setAmount(current.amount);
+    }
+  }, [current]);
 
   return (
     <>
-      <h3>Add new transaction</h3>
+      <h3>{editMode ? 'Edit' : 'Add new'} transaction</h3>
       <form onSubmit={createTransactionHandler}>
         <div className='form-control'>
           <label htmlFor='text'>Text</label>
@@ -42,7 +63,7 @@ export const AddTransaction = () => {
             placeholder='Enter amount...'
           />
         </div>
-        <button className='btn'>Add transaction</button>
+        <button className='btn'>Save transaction</button>
       </form>
     </>
   );

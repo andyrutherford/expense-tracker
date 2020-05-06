@@ -60,7 +60,7 @@ exports.deleteTransaction = async (req, res, next) => {
     if (!transaction) {
       return res.status(404).json({
         success: false,
-        error: 'No transaction found',
+        error: 'Transaction not found',
       });
     }
 
@@ -84,5 +84,42 @@ exports.deleteTransaction = async (req, res, next) => {
         error: 'Server error',
       });
     }
+  }
+};
+
+// @desc    Edit transaction
+// @route   PUT /api/v1/transactions/:id
+// @accss   Public
+exports.editTransaction = async (req, res, next) => {
+  const id = req.params.id;
+  const { amount, text } = req.body;
+
+  const transactionFields = {};
+  if (text) transactionFields.text = text;
+  if (amount) transactionFields.amount = amount;
+  try {
+    let transaction = await Transaction.findById(id);
+    if (!transaction) {
+      return res.status(404).json({
+        success: false,
+        error: 'Transaction not found',
+      });
+    }
+
+    transaction = await Transaction.findByIdAndUpdate(
+      req.params.id,
+      { $set: transactionFields },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: transaction,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: 'Server error',
+    });
   }
 };

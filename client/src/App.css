@@ -100,6 +100,16 @@ input[type='number'] {
   width: 100%;
 }
 
+.btn-edit {
+  cursor: pointer;
+  background-color: #9c88ff;
+  box-shadow: var(--box-shadow);
+  color: #fff;
+  border: 0;
+  font-size: 11px;
+
+}
+
 .btn:focus,
 .delete-btn:focus {
   outline: 0;

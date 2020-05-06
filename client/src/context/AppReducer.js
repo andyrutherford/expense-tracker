@@ -18,6 +18,18 @@ export default (state, action) => {
           (transaction) => transaction._id !== action.payload
         ),
       };
+    case 'EDIT_TRANSACTION':
+      return {
+        ...state,
+        transactions: state.transactions.map((transaction) =>
+          transaction._id === action.payload._id ? action.payload : transaction
+        ),
+      };
+    case 'SET_CURRENT':
+      return {
+        ...state,
+        current: action.payload,
+      };
     case 'TRANSACTION_ERROR':
       return {
         ...state,

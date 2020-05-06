@@ -10,7 +10,16 @@ export const Transaction = ({ transaction }) => {
 
   return (
     <li className={transaction.amount > 0 ? 'plus' : 'minus'}>
-      {transaction.text}
+      <span>
+        {transaction.text}
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button
+          className='btn-edit'
+          onClick={() => context.setCurrent(transaction)}
+        >
+          Edit
+        </button>
+      </span>
       <span>
         {sign}${numberWithCommas(Math.abs(transaction.amount))}
       </span>
