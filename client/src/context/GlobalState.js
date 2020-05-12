@@ -9,6 +9,7 @@ const initialState = {
   error: null,
   loading: true,
   user: null,
+  isAuthenticated: false,
 };
 
 // Create context
@@ -106,12 +107,26 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
-  const loginUser = (formData) => {
-    console.log('logging in user....');
-    dispatch({
-      type: 'LOGIN_USER',
-      payload: formData.email,
-    });
+  const loginUser = async (userData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post('/api/v1/auth', userData, config);
+      console.log(res.data);
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: 'AUTH_ERROR',
+        payload: err.response.data.error,
+      });
+    }
   };
 
   return (
@@ -122,6 +137,7 @@ export const GlobalProvider = ({ children }) => {
         error: state.error,
         loading: state.loading,
         user: state.user,
+        isAuthenticated: state.isAuthenticated,
         getTransactions,
         setCurrent,
         deleteTransaction,

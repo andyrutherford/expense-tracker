@@ -35,10 +35,21 @@ export default (state, action) => {
         ...state,
         error: action.payload,
       };
-    case 'LOGIN_USER':
+    case 'REGISTER_SUCCESS':
+    case 'LOGIN_SUCCESS':
+      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
-        user: action.payload,
+        error: null,
+        isAuthenticated: true,
+        user: action.payload.user,
+        loading: false,
+      };
+    case 'AUTH_ERROR':
+      alert(action.payload);
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

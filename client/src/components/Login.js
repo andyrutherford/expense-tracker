@@ -29,6 +29,13 @@ export const Login = () => {
     <div className='form-control'>
       <h1>
         Account <span className='text-primary'>Login</span>
+        <button
+          onClick={() => {
+            setUser({ email: 'frank@gmail.com', password: '123456' });
+          }}
+        >
+          Fill
+        </button>
       </h1>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
