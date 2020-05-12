@@ -2,35 +2,34 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// @desc    Create a user
+// @desc    Login user
 // @route   POST /api/v1/auth
 // @accss  Public
-exports.createUser = async (req, res, next) => {
-  const { name, email, password } = req.body;
+exports.loginUser = async (req, res, next) => {
+  const { email, password } = req.body;
+
   try {
+    // See if user already exists
     let user = await User.findOne({ email });
 
-    // Make sure user does not already exist
-    if (user) {
+    if (!user) {
       return res.status(400).json({
         success: false,
-        error: 'User already exists',
+        error: 'User not found',
       });
     }
 
-    // Create new user
-    user = new User({
-      name,
-      email,
-      password,
-    });
+    // Decrypt stored password and compare with plaintext password
+    const isMatch = await bcrypt.compare(password, user.password);
 
-    // Encrypt password
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid credentials',
+      });
+    }
 
-    await user.save();
-
+    // If email and password are correct, issue new JWT
     const payload = {
       user: {
         email: user.email,
@@ -38,7 +37,6 @@ exports.createUser = async (req, res, next) => {
       },
     };
 
-    // Create JWT
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
