@@ -2,9 +2,26 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// @desc    Get logged in user
+// @route   GET /api/v1/auth
+// @access  Public
+exports.getUser = async (req, res, next) => {
+  try {
+    const user = await (await User.findById(req.user.id)).isSelected(
+      '-password'
+    );
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
 // @desc    Login user
 // @route   POST /api/v1/auth
-// @accss  Public
+// @access  Public
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 

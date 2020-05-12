@@ -116,7 +116,6 @@ export const GlobalProvider = ({ children }) => {
 
     try {
       const res = await axios.post('/api/v1/auth', userData, config);
-      console.log(res.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: res.data,

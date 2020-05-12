@@ -3,10 +3,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { Login } from './components/Login';
+import { setAuthToken } from './utils/setAuthToken';
 
 import { GlobalProvider } from './context/GlobalState';
 
 import './App.css';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
   return (
