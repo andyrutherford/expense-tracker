@@ -49,12 +49,12 @@ h4 {
   margin: 20px 0;
 }
 
-.inc-exp-container>div {
+.inc-exp-container > div {
   flex: 1;
   text-align: center;
 }
 
-.inc-exp-container>div:first-of-type {
+.inc-exp-container > div:first-of-type {
   border-right: 1px solid #dedede;
 }
 
@@ -78,7 +78,9 @@ label {
 }
 
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+input[type='email'],
+input[type='password'] {
   border: 1px solid #dedede;
   border-radius: 2px;
   display: block;
@@ -107,7 +109,6 @@ input[type='number'] {
   color: #fff;
   border: 0;
   font-size: 11px;
-
 }
 
 .btn:focus,
