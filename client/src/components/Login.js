@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
 
 export const Login = () => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+
+  const context = useContext(GlobalContext);
 
   const onChange = (e) => {
     setUser({
@@ -15,6 +18,11 @@ export const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (user.email === '' || user.password === '') {
+      alert('Please fill in both fields!');
+    } else {
+      context.loginUser({ email: user.email, password: user.password });
+    }
   };
 
   return (

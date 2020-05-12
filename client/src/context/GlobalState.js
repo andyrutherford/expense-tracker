@@ -8,6 +8,7 @@ const initialState = {
   current: null,
   error: null,
   loading: true,
+  user: null,
 };
 
 // Create context
@@ -105,6 +106,14 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const loginUser = (formData) => {
+    console.log('logging in user....');
+    dispatch({
+      type: 'LOGIN_USER',
+      payload: formData.email,
+    });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -112,11 +121,13 @@ export const GlobalProvider = ({ children }) => {
         current: state.current,
         error: state.error,
         loading: state.loading,
+        user: state.user,
         getTransactions,
         setCurrent,
         deleteTransaction,
         createTransaction,
         editTransaction,
+        loginUser,
       }}
     >
       {children}
