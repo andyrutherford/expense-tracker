@@ -5,7 +5,9 @@ const Transaction = require('../models/Transaction');
 // @accss  Public
 exports.getTransactions = async (req, res, next) => {
   try {
-    const transactions = await Transaction.find();
+    const transactions = await Transaction.find({ user: req.user.id }).sort({
+      date: -1,
+    });
 
     await res.status(200).json({
       success: true,
