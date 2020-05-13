@@ -1,13 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 
-export const Login = () => {
+export const Login = (props) => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
   const context = useContext(GlobalContext);
+  const { isAuthenticated } = context;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+  }, [isAuthenticated]);
 
   const onChange = (e) => {
     setUser({

@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { Login } from './components/Login';
 import { setAuthToken } from './utils/setAuthToken';
+import { PrivateRoute } from './components/routing/PrivateRoute';
 
 import { GlobalProvider } from './context/GlobalState';
 
@@ -20,10 +21,9 @@ function App() {
         <Header />
         <div className='container'>
           <Switch>
+            <PrivateRoute exact path='/' component={Dashboard} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/' component={Dashboard} />
           </Switch>
-          <Dashboard />
         </div>
       </Router>
     </GlobalProvider>
