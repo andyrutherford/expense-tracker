@@ -11,7 +11,8 @@ const initialState = {
   error: null,
   loading: true,
   user: null,
-  isAuthenticated: false,
+  isAuthenticated: null,
+  token: localStorage.getItem('token'),
 };
 
 // Create context
@@ -113,10 +114,9 @@ export const GlobalProvider = ({ children }) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-
     try {
-      const res = await axios.get('api/auth');
-      dispatch({ type: 'USER_LOADED', payload: res.data });
+      const res = await axios.get('/api/v1/auth');
+      dispatch({ type: 'USER_LOADED', payload: res.data.user });
     } catch (err) {
       dispatch({
         type: 'AUTH_ERROR',
@@ -138,6 +138,7 @@ export const GlobalProvider = ({ children }) => {
         type: 'LOGIN_SUCCESS',
         payload: res.data,
       });
+      loadUser();
     } catch (err) {
       dispatch({
         type: 'AUTH_ERROR',
@@ -155,6 +156,7 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         user: state.user,
         isAuthenticated: state.isAuthenticated,
+        token: state.token,
         getTransactions,
         setCurrent,
         deleteTransaction,

@@ -40,7 +40,7 @@ export default (state, action) => {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: action.payload.user,
+        user: action.payload,
       };
     case 'REGISTER_SUCCESS':
     case 'LOGIN_SUCCESS':
@@ -53,7 +53,6 @@ export default (state, action) => {
         loading: false,
       };
     case 'AUTH_ERROR':
-      alert(action.payload);
       return {
         ...state,
         error: action.payload,

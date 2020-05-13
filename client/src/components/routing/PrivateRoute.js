@@ -6,9 +6,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   const context = useContext(GlobalContext);
   const { isAuthenticated, loading } = context;
 
-  useEffect(() => {
-    console.log(context);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Route

@@ -14,7 +14,7 @@ export const Login = (props) => {
     if (isAuthenticated) {
       props.history.push('/');
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, props.history]);
 
   const onChange = (e) => {
     setUser({
