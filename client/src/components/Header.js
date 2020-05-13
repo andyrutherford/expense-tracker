@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const Header = () => {
   const context = useContext(GlobalContext);
-  const { loadUser } = context;
+  const { loadUser, logoutUser, isAuthenticated } = context;
 
   useEffect(() => {
     loadUser();
@@ -13,6 +13,7 @@ export const Header = () => {
   return (
     <span>
       <h2>Expense Tracker</h2>
+      {isAuthenticated && <button onClick={() => logoutUser()}>Logout</button>}
       {context.user && <p>Hello {context.user.name}</p>}
     </span>
   );
