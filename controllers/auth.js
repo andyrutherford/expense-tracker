@@ -7,9 +7,7 @@ const jwt = require('jsonwebtoken');
 // @access  Public
 exports.getUser = async (req, res, next) => {
   try {
-    const user = await (await User.findById(req.user.id)).isSelected(
-      '-password'
-    );
+    const user = await User.findById(req.user.id).select('-password');
     res.json({ success: true, user });
   } catch (error) {
     res.status(500).json({

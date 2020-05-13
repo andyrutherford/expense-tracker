@@ -6,8 +6,9 @@ const {
   editTransaction,
   deleteTransaction,
 } = require('../controllers/transactions');
+const authMiddleware = require('../middleware/auth');
 
-router.route('/').get(getTransactions).post(addTransaction);
+router.route('/').get(getTransactions).post(authMiddleware, addTransaction);
 
 router.route('/:id').put(editTransaction);
 
