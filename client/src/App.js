@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
-import { Login } from './components/Login';
+import { Login } from './components/pages/Login';
+import { Register } from './components/pages/Register';
 import { setAuthToken } from './utils/setAuthToken';
 import { PrivateRoute } from './components/routing/PrivateRoute';
 
@@ -23,6 +24,7 @@ function App() {
           <Switch>
             <PrivateRoute exact path='/' component={Dashboard} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Register} />
           </Switch>
         </div>
       </Router>

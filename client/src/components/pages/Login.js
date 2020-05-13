@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState';
 
 export const Login = (props) => {
   const [user, setUser] = useState({
@@ -73,7 +73,9 @@ export const Login = (props) => {
           className='btn btn-primary btn-block'
         />
       </form>
-      <div></div>
+      <button className='btn' onClick={() => props.history.push('/signup')}>
+        Create an Account
+      </button>
     </div>
   );
 };

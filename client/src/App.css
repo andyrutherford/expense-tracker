@@ -40,6 +40,11 @@ h4 {
   text-transform: uppercase;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .inc-exp-container {
   background-color: #fff;
   box-shadow: var(--box-shadow);

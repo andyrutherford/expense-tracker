@@ -11,10 +11,16 @@ export const Header = () => {
   }, []);
 
   return (
-    <span>
-      <h2>Expense Tracker</h2>
-      {isAuthenticated && <button onClick={() => logoutUser()}>Logout</button>}
+    <>
+      <span className='header'>
+        <h2>
+          <i class='fas fa-coins'></i> Expense Tracker
+        </h2>
+        {isAuthenticated && (
+          <button onClick={() => logoutUser()}>Logout</button>
+        )}
+      </span>
       {context.user && <p>Hello {context.user.name}</p>}
-    </span>
+    </>
   );
 };

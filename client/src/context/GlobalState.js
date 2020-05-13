@@ -154,6 +154,28 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const createUser = async (userData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post('/api/v1/users', userData, config);
+      dispatch({
+        type: 'REGISTER_SUCCESS',
+        payload: res.data,
+      });
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: 'AUTH_ERROR',
+        payload: err.response.data.error,
+      });
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -172,6 +194,7 @@ export const GlobalProvider = ({ children }) => {
         loadUser,
         loginUser,
         logoutUser,
+        createUser,
       }}
     >
       {children}

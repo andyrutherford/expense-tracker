@@ -63,7 +63,9 @@ export const AddTransaction = () => {
             placeholder='Enter amount...'
           />
         </div>
-        <button className='btn'>Save transaction</button>
+        <button className='btn'>
+          <i className='fas fa-save'></i> Save transaction
+        </button>
       </form>
     </>
   );
