@@ -40,7 +40,16 @@ export const AddTransaction = () => {
 
   return (
     <>
-      <h3>{editMode ? 'Edit' : 'Add new'} transaction</h3>
+      <h3>
+        {editMode ? (
+          'Edit'
+        ) : (
+          <span>
+            <i className='fas fa-plus'></i> Add
+          </span>
+        )}{' '}
+        transaction
+      </h3>
       <form onSubmit={createTransactionHandler}>
         <div className='form-control'>
           <label htmlFor='text'>Text</label>

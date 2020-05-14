@@ -9,11 +9,13 @@ export default (state, action) => {
     case 'CREATE_TRANSACTION':
       return {
         ...state,
+        loading: false,
         transactions: [...state.transactions, action.payload],
       };
     case 'DELETE_TRANSACTION':
       return {
         ...state,
+        loading: false,
         transactions: state.transactions.filter(
           (transaction) => transaction._id !== action.payload
         ),
@@ -21,6 +23,7 @@ export default (state, action) => {
     case 'EDIT_TRANSACTION':
       return {
         ...state,
+        loading: false,
         transactions: state.transactions.map((transaction) =>
           transaction._id === action.payload._id ? action.payload : transaction
         ),
@@ -28,11 +31,13 @@ export default (state, action) => {
     case 'SET_CURRENT':
       return {
         ...state,
+        loading: false,
         current: action.payload,
       };
     case 'TRANSACTION_ERROR':
       return {
         ...state,
+        loading: false,
         error: action.payload,
       };
     case 'USER_LOADED':
@@ -64,6 +69,7 @@ export default (state, action) => {
     case 'AUTH_ERROR':
       return {
         ...state,
+        loading: false,
         error: action.payload,
       };
     default:

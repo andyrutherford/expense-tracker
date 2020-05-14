@@ -113,15 +113,16 @@ export const GlobalProvider = ({ children }) => {
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
-    }
-    try {
-      const res = await axios.get('/api/v1/auth');
-      dispatch({ type: 'USER_LOADED', payload: res.data.user });
-    } catch (err) {
-      dispatch({
-        type: 'AUTH_ERROR',
-        payload: err.response.data.error,
-      });
+
+      try {
+        const res = await axios.get('/api/v1/auth');
+        dispatch({ type: 'USER_LOADED', payload: res.data.user });
+      } catch (err) {
+        dispatch({
+          type: 'AUTH_ERROR',
+          payload: err.response.data.error,
+        });
+      }
     }
   };
 
@@ -148,7 +149,6 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
-    console.log('logout user');
     dispatch({
       type: 'LOGOUT_USER',
     });

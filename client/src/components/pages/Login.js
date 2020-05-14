@@ -34,8 +34,9 @@ export const Login = (props) => {
 
   return (
     <div className='form-control'>
-      <h1>
-        Account <span className='text-primary'>Login</span>
+      <h1>Account Login</h1>
+      <p>
+        Just testing? Login to a test account:{' '}
         <button
           onClick={() => {
             setUser({ email: 'frank@gmail.com', password: '123456' });
@@ -43,7 +44,7 @@ export const Login = (props) => {
         >
           Fill
         </button>
-      </h1>
+      </p>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label htmlFor='email'>Email Address</label>

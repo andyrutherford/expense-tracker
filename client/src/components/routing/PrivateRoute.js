@@ -6,13 +6,15 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   const context = useContext(GlobalContext);
   const { isAuthenticated, loading } = context;
 
-  useEffect(() => {}, []);
-
   return (
     <Route
       {...rest}
       render={(props) =>
-        !isAuthenticated ? <Redirect to='/login' /> : <Component {...props} />
+        !isAuthenticated && !loading ? (
+          <Redirect to='/login' />
+        ) : (
+          <Component {...props} />
+        )
       }
     />
   );

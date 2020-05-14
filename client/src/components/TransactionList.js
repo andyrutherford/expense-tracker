@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const TransactionList = () => {
   const context = useContext(GlobalContext);
-  const { transactions, getTransactions } = context;
+  const { transactions, getTransactions, loading } = context;
 
   useEffect(() => {
     getTransactions();
@@ -13,11 +13,17 @@ export const TransactionList = () => {
 
   return (
     <>
-      <h3>History</h3>
+      <h3>
+        <i className='fas fa-list-ul'></i> History
+      </h3>
       <ul className='list'>
-        {transactions.map((transaction) => (
-          <Transaction key={transaction._id} transaction={transaction} />
-        ))}
+        {transactions !== null && !loading ? (
+          transactions.map((transaction) => (
+            <Transaction key={transaction._id} transaction={transaction} />
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </ul>
     </>
   );
