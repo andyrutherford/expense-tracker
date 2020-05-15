@@ -72,6 +72,16 @@ export default (state, action) => {
         loading: false,
         error: action.payload,
       };
+    case 'SET_ALERT':
+      return {
+        ...state,
+        alerts: [action.payload, ...state.alerts],
+      };
+    case 'REMOVE_ALERT':
+      return {
+        ...state,
+        alerts: state.alerts.filter((alert) => alert.id !== action.payload),
+      };
     default:
       return state;
   }

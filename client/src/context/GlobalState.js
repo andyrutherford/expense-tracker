@@ -14,7 +14,7 @@ const initialState = {
   user: null,
   isAuthenticated: null,
   token: localStorage.getItem('token'),
-  alert: [],
+  alerts: [],
 };
 
 // Create context
@@ -180,14 +180,15 @@ export const GlobalProvider = ({ children }) => {
 
   // Set Alert
   const setAlert = (message, type, timeout = 5000) => {
+    console.log(message, type);
     const id = uuidv4();
     dispatch({
       type: 'SET_ALERT',
       payload: { message, type, id },
     });
     setTimeout(() => {
-      dispatch({ type: 'REMOVE_ALERT', payload: id }, timeout);
-    });
+      dispatch({ type: 'REMOVE_ALERT', payload: id });
+    }, 5000);
   };
 
   return (
@@ -200,7 +201,7 @@ export const GlobalProvider = ({ children }) => {
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         token: state.token,
-        alert: state.alert,
+        alerts: state.alerts,
         getTransactions,
         setCurrent,
         deleteTransaction,
