@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Alerts } from './components/Alerts';
 import { Dashboard } from './components/Dashboard';
 import { Login } from './components/pages/Login';
 import { Register } from './components/pages/Register';
@@ -21,6 +22,7 @@ function App() {
       <Router>
         <Header />
         <div className='container'>
+          <Alerts />
           <Switch>
             <PrivateRoute exact path='/' component={Dashboard} />
             <Route exact path='/login' component={Login} />
