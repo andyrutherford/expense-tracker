@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 import { setAuthToken } from '../utils/setAuthToken';
 
@@ -13,6 +14,7 @@ const initialState = {
   user: null,
   isAuthenticated: null,
   token: localStorage.getItem('token'),
+  alert: [],
 };
 
 // Create context
@@ -176,6 +178,18 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  // Set Alert
+  const setAlert = (message, type, timeout = 5000) => {
+    const id = uuidv4();
+    dispatch({
+      type: 'SET_ALERT',
+      payload: { message, type, id },
+    });
+    setTimeout(() => {
+      dispatch({ type: 'REMOVE_ALERT', payload: id }, timeout);
+    });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -186,6 +200,7 @@ export const GlobalProvider = ({ children }) => {
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         token: state.token,
+        alert: state.alert,
         getTransactions,
         setCurrent,
         deleteTransaction,
@@ -195,6 +210,7 @@ export const GlobalProvider = ({ children }) => {
         loginUser,
         logoutUser,
         createUser,
+        setAlert,
       }}
     >
       {children}
