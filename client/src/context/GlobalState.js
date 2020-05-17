@@ -17,6 +17,12 @@ const initialState = {
   alerts: [],
 };
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 // Create context
 export const GlobalContext = createContext(initialState);
 
@@ -49,43 +55,34 @@ export const GlobalProvider = ({ children }) => {
         type: 'DELETE_TRANSACTION',
         payload: id,
       });
+      setAlert('Transaction removed.', 'danger');
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
         payload: err.response.data.error,
       });
+      setAlert('Something went wrong.  Please try again.', 'danger');
     }
   };
 
   const createTransaction = async (transaction) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
     try {
       const res = await axios.post('/api/v1/transactions', transaction, config);
-
       dispatch({
         type: 'CREATE_TRANSACTION',
         payload: res.data.data,
       });
+      setAlert('Transaction added.', 'success');
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
         payload: err.response.data.error,
       });
+      setAlert('Something went wrong.  Please try again.', 'danger');
     }
   };
 
   const editTransaction = async (transaction, updates) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
     try {
       const res = await axios.put(
         `/api/v1/transactions/${transaction._id}`,
@@ -97,11 +94,13 @@ export const GlobalProvider = ({ children }) => {
         type: 'EDIT_TRANSACTION',
         payload: res.data.data,
       });
+      setAlert('Transaction saved.', 'success');
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
         payload: err.response.data.error,
       });
+      setAlert('Something went wrong.  Please try again.', 'danger');
     }
   };
 
@@ -129,12 +128,6 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const loginUser = async (userData) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
     try {
       const res = await axios.post('/api/v1/auth', userData, config);
       dispatch({
@@ -142,7 +135,9 @@ export const GlobalProvider = ({ children }) => {
         payload: res.data,
       });
       loadUser();
+      setAlert('Log in successful.', 'success');
     } catch (err) {
+      setAlert(err.response.data.error, 'danger');
       dispatch({
         type: 'AUTH_ERROR',
         payload: err.response.data.error,
@@ -157,12 +152,6 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const createUser = async (userData) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
     try {
       const res = await axios.post('/api/v1/users', userData, config);
       dispatch({
@@ -179,8 +168,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   // Set Alert
-  const setAlert = (message, type, timeout = 5000) => {
-    console.log(message, type);
+  const setAlert = (message, type, timeout = 4000) => {
     const id = uuidv4();
     dispatch({
       type: 'SET_ALERT',

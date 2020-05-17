@@ -45,6 +45,24 @@ h4 {
   justify-content: space-between;
 }
 
+.alert {
+  padding: 0.7rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: #f4f4f4;
+  color: #333;
+}
+
+.alert-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.alert-success {
+  background: #28a745;
+  color: #fff;
+}
+
 .inc-exp-container {
   background-color: #fff;
   box-shadow: var(--box-shadow);
@@ -64,7 +82,7 @@ h4 {
 }
 
 .money {
-  font-size: 20px;
+  font-size: 30px;
   letter-spacing: 1px;
   margin: 5px 0;
 }

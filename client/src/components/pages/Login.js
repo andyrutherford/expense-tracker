@@ -38,7 +38,7 @@ export const Login = (props) => {
       <button
         onClick={() => {
           console.log('test alert');
-          setAlert('test message', 'test type');
+          setAlert('test message', 'danger');
         }}
       >
         Test
