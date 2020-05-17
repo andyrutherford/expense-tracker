@@ -4,7 +4,12 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const TransactionList = () => {
   const context = useContext(GlobalContext);
-  const { transactions, getTransactions, loading } = context;
+  const {
+    transactions,
+    getTransactions,
+    loading,
+    deleteAllTransactions,
+  } = context;
 
   useEffect(() => {
     getTransactions();
@@ -14,7 +19,8 @@ export const TransactionList = () => {
   return (
     <>
       <h3>
-        <i className='fas fa-list-ul'></i> History
+        <i className='fas fa-list-ul'></i> History{' '}
+        <button onClick={() => deleteAllTransactions()}>Delete All</button>
       </h3>
       <ul className='list'>
         {transactions !== null && !loading ? (

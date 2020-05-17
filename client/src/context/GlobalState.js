@@ -65,6 +65,22 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const deleteAllTransactions = async () => {
+    try {
+      await axios.delete('/api/v1/transactions/');
+      dispatch({
+        type: 'DELETE_ALL_TRANSACTIONS',
+      });
+      setAlert('All transactions have been deleted.', 'danger');
+    } catch (err) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: err.response.data.error,
+      });
+      setAlert('Something went wrong.  Please try again.', 'danger');
+    }
+  };
+
   const createTransaction = async (transaction) => {
     try {
       const res = await axios.post('/api/v1/transactions', transaction, config);
@@ -193,6 +209,7 @@ export const GlobalProvider = ({ children }) => {
         getTransactions,
         setCurrent,
         deleteTransaction,
+        deleteAllTransactions,
         createTransaction,
         editTransaction,
         loadUser,

@@ -20,6 +20,12 @@ export default (state, action) => {
           (transaction) => transaction._id !== action.payload
         ),
       };
+    case 'DELETE_ALL_TRANSACTIONS':
+      return {
+        ...state,
+        loading: false,
+        transactions: [],
+      };
     case 'EDIT_TRANSACTION':
       return {
         ...state,

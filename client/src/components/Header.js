@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const Header = () => {
   const context = useContext(GlobalContext);
-  const { loadUser, logoutUser, isAuthenticated } = context;
+  const { loadUser, logoutUser, isAuthenticated, user } = context;
 
   useEffect(() => {
     loadUser();
@@ -16,13 +16,15 @@ export const Header = () => {
         <h2>
           <i className='fas fa-coins'></i> Expense Tracker
         </h2>
-        {isAuthenticated && (
-          <button className='logout-btn' onClick={() => logoutUser()}>
-            Logout
-          </button>
+        {isAuthenticated && user && (
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <p>{user.name} |&nbsp;</p>
+            <button className='logout-btn' onClick={() => logoutUser()}>
+              Logout
+            </button>
+          </div>
         )}
       </span>
-      {context.user && <p>Hello {context.user.name}</p>}
     </>
   );
 };

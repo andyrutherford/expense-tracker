@@ -35,14 +35,6 @@ export const Login = (props) => {
   return (
     <div className='form-control'>
       <h1>Account Login</h1>
-      <button
-        onClick={() => {
-          console.log('test alert');
-          setAlert('test message', 'danger');
-        }}
-      >
-        Test
-      </button>
       <p>
         Just testing? Login to a test account:{' '}
         <button

@@ -73,7 +73,8 @@ export const AddTransaction = () => {
           />
         </div>
         <button className='btn'>
-          <i className='fas fa-save'></i> Save transaction
+          <i className='fas fa-save'></i>
+          {editMode ? ' Save' : ' Add'} transaction
         </button>
       </form>
     </>
