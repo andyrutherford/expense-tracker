@@ -74,7 +74,10 @@ export const Login = (props) => {
           className='btn btn-primary btn-block'
         />
       </form>
-      <button className='btn' onClick={() => props.history.push('/signup')}>
+      <button
+        className='btn btn-primary btn-block'
+        onClick={() => props.history.push('/signup')}
+      >
         Create an Account
       </button>
     </div>
