@@ -161,6 +161,21 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const changePassword = async (userData) => {
+    console.log(userData);
+    try {
+      const res = await axios.put('/api/v1/auth', userData, config);
+      dispatch({
+        type: 'PASSWORD_CHANGE_SUCCESS',
+        payload: res.data,
+      });
+      loadUser();
+      setAlert(res.data.message, 'success');
+    } catch (err) {
+      setAlert(err.response.data.error, 'danger');
+    }
+  };
+
   const logoutUser = () => {
     dispatch({
       type: 'LOGOUT_USER',
@@ -216,6 +231,7 @@ export const GlobalProvider = ({ children }) => {
         loginUser,
         logoutUser,
         createUser,
+        changePassword,
         setAlert,
       }}
     >

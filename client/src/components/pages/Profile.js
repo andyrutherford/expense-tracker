@@ -1,13 +1,15 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
-export const Profile = () => {
-  const { loadUser } = useContext(GlobalContext);
+export const Profile = (props) => {
+  const { loadUser, setAlert, changePassword } = useContext(GlobalContext);
   const [user, setUser] = useState({
     oldPassword: '',
     newPassword: '',
     confirmNewPassword: '',
   });
+
+  const { oldPassword, newPassword, confirmNewPassword } = user;
 
   useEffect(() => {
     console.log('use effect profile');
@@ -21,6 +23,30 @@ export const Profile = () => {
     });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!oldPassword || !newPassword || !confirmNewPassword) {
+      return setAlert('All input fields are required.', 'danger');
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      return setAlert('New passwords do not match.', 'danger');
+    }
+
+    if (oldPassword === newPassword) {
+      return setAlert(
+        'New password must be different from old password.',
+        'danger'
+      );
+    }
+
+    changePassword({ oldPassword, newPassword });
+    setTimeout(() => {
+      props.history.push('/');
+    }, 3000);
+  };
+
   return (
     <>
       <h3>
@@ -28,13 +54,13 @@ export const Profile = () => {
           <i className='fas fa-unlock-alt'></i> Change Your Password
         </span>
       </h3>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className='form-control'>
           <label htmlFor='text'>Old Password</label>
           <input
             type='text'
             name='oldPassword'
-            value={user.oldPassword}
+            value={oldPassword}
             onChange={onChange}
             placeholder=''
           />
@@ -44,7 +70,7 @@ export const Profile = () => {
           <input
             type='text'
             name='newPassword'
-            value={user.newPassword}
+            value={newPassword}
             onChange={onChange}
             placeholder=''
           />
@@ -54,7 +80,7 @@ export const Profile = () => {
           <input
             type='text'
             name='confirmNewPassword'
-            value={user.confirmNewPassword}
+            value={confirmNewPassword}
             onChange={onChange}
             placeholder=''
           />

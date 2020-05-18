@@ -109,7 +109,7 @@ exports.changePassword = async (req, res, next) => {
     if (!isMatch) {
       return res.status(400).json({
         success: false,
-        error: 'Your old password is incorrect.  Please try again.',
+        error: 'Your old password is incorrect.',
       });
     }
 
@@ -142,7 +142,7 @@ exports.changePassword = async (req, res, next) => {
         if (err) throw err;
         res.json({
           success: true,
-          user,
+          message: 'Password changed successfully',
           token,
         });
       }
