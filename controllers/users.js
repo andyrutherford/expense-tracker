@@ -64,7 +64,7 @@ exports.createUser = async (req, res, next) => {
       });
     } else {
       return res.status(500).json({
-        sucess: false,
+        success: false,
         error: 'Server error',
       });
     }
