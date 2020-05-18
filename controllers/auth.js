@@ -88,7 +88,6 @@ exports.loginUser = async (req, res, next) => {
 // @access  Private
 exports.changePassword = async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
-  console.log(oldPassword, newPassword);
   // Extract user id from jwt
   const { email, id } = req.user;
 

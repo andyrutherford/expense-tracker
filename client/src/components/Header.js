@@ -18,7 +18,9 @@ export const Header = () => {
         </h2>
         {isAuthenticated && user && (
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <p>{user.name} |&nbsp;</p>
+            <p>
+              <a href='/profile'>{user.name}</a> |&nbsp;
+            </p>
             <button className='logout-btn' onClick={() => logoutUser()}>
               Logout
             </button>

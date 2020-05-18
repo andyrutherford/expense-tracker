@@ -5,6 +5,7 @@ import { Alerts } from './components/Alerts';
 import { Dashboard } from './components/Dashboard';
 import { Login } from './components/pages/Login';
 import { Register } from './components/pages/Register';
+import { Profile } from './components/pages/Profile';
 import { setAuthToken } from './utils/setAuthToken';
 import { PrivateRoute } from './components/routing/PrivateRoute';
 
@@ -25,6 +26,7 @@ function App() {
           <Alerts />
           <Switch>
             <PrivateRoute exact path='/' component={Dashboard} />
+            <Route exact path='/profile' component={Profile} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Register} />
           </Switch>

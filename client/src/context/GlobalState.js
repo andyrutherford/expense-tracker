@@ -10,7 +10,7 @@ const initialState = {
   transactions: [],
   current: null,
   error: null,
-  loading: true,
+  loading: false,
   user: null,
   isAuthenticated: null,
   token: localStorage.getItem('token'),
