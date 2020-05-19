@@ -9,7 +9,7 @@ export const Alerts = () => {
     alerts.length > 0 &&
     alerts.map((alert) => (
       <div key={alert.id} className={`alert alert-${alert.type}`}>
-        <i className='fas fa-info-circle'></i> {alert.message}
+        <i className=' fas fa-info-circle'></i> {alert.message}
       </div>
     ))
   );

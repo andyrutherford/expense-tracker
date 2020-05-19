@@ -52,24 +52,20 @@ export const AddTransaction = () => {
       </h3>
       <form onSubmit={createTransactionHandler}>
         <div className='form-control'>
-          <label htmlFor='text'>Text</label>
+          <label htmlFor='text'>Description</label>
           <input
             type='text'
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder='Enter text...'
+            placeholder='Enter a description'
           />
         </div>
         <div className='form-control'>
-          <label htmlFor='amount'>
-            Amount <br />
-            (negative - expense, positive - income)
-          </label>
+          <label htmlFor='amount'>Amount (positive or negative number)</label>
           <input
             type='number'
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder='Enter amount...'
           />
         </div>
         <button className='btn'>

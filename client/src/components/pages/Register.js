@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState';
 
 export const Register = (props) => {
+  const history = useHistory();
   const context = useContext(GlobalContext);
   const { isAuthenticated, setAlert } = context;
 
@@ -47,7 +49,10 @@ export const Register = (props) => {
 
   return (
     <div className='form-control'>
-      <h1>Create an Account</h1>
+      <h2>Create an Account</h2>
+      <p>
+        Aleady have an account? Login <Link to='/login'>here</Link>.
+      </p>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label htmlFor='email'>Name</label>

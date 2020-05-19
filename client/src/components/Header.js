@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 
 export const Header = (props) => {
@@ -22,9 +21,9 @@ export const Header = (props) => {
   return (
     <>
       <span className='header'>
-        <h2>
-          <i className='fas fa-coins'></i> Expense Tracker
-        </h2>
+        <h1>
+          <i className='fas fa-coins'></i>&nbsp;Expense Tracker
+        </h1>
         {isAuthenticated && user && (
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <ul>
@@ -33,9 +32,9 @@ export const Header = (props) => {
               </li>
             </ul>
             &nbsp;|&nbsp;
-            <button className='btn-nav' onClick={logoutHandler}>
+            <Link className='btn-nav' onClick={logoutHandler} to='/login'>
               Logout
-            </button>
+            </Link>
           </div>
         )}
       </span>

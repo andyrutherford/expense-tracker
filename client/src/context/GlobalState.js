@@ -94,7 +94,7 @@ export const GlobalProvider = ({ children }) => {
         type: 'TRANSACTION_ERROR',
         payload: err.response.data.error,
       });
-      setAlert('Something went wrong.  Please try again.', 'danger');
+      setAlert('Please enter a valid description and amount.', 'danger');
     }
   };
 
