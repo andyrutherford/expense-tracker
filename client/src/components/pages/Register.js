@@ -3,7 +3,7 @@ import { GlobalContext } from '../../context/GlobalState';
 
 export const Register = (props) => {
   const context = useContext(GlobalContext);
-  const { isAuthenticated } = context;
+  const { isAuthenticated, setAlert } = context;
 
   const [user, setUser] = useState({
     name: '',
@@ -33,9 +33,9 @@ export const Register = (props) => {
       user.password === '' ||
       user.confirmPassword === ''
     ) {
-      alert('Please fill in all fields!');
+      setAlert('All input fields are required.', 'danger');
     } else if (user.password !== user.confirmPassword) {
-      alert('Passwords must match!');
+      setAlert('Passwords must match!', 'danger');
     } else {
       context.createUser({
         name: user.name,
@@ -57,7 +57,6 @@ export const Register = (props) => {
             name='name'
             value={user.name}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -68,7 +67,6 @@ export const Register = (props) => {
             name='email'
             value={user.email}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -79,7 +77,6 @@ export const Register = (props) => {
             name='password'
             value={user.password}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -90,7 +87,6 @@ export const Register = (props) => {
             name='confirmPassword'
             value={user.confirmPassword}
             onChange={onChange}
-            required
           />
         </div>
         <input

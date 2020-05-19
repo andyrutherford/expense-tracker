@@ -2,7 +2,8 @@ import React, { useEffect, useContext, useState } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
 export const Profile = (props) => {
-  const { loadUser, setAlert, changePassword } = useContext(GlobalContext);
+  const context = useContext(GlobalContext);
+  const { loadUser, setAlert, changePassword } = context;
   const [user, setUser] = useState({
     oldPassword: '',
     newPassword: '',
@@ -47,6 +48,21 @@ export const Profile = (props) => {
     <>
       <h3>
         <span>
+          <i className='fas fa-user-circle'></i> Your Account
+        </span>
+      </h3>
+      <form>
+        <div className='form-control'>
+          <label htmlFor='text'>Name</label>
+          <input type='text' value={context.user.name} disabled />
+        </div>
+        <div className='form-control'>
+          <label htmlFor='text'>Email</label>
+          <input type='text' value={context.user.email} disabled />
+        </div>
+      </form>
+      <h3>
+        <span>
           <i className='fas fa-unlock-alt'></i> Change Your Password
         </span>
       </h3>
@@ -54,7 +70,7 @@ export const Profile = (props) => {
         <div className='form-control'>
           <label htmlFor='text'>Old Password</label>
           <input
-            type='text'
+            type='password'
             name='oldPassword'
             value={oldPassword}
             onChange={onChange}
@@ -63,7 +79,7 @@ export const Profile = (props) => {
         <div className='form-control'>
           <label htmlFor='text'>New Password</label>
           <input
-            type='text'
+            type='password'
             name='newPassword'
             value={newPassword}
             onChange={onChange}
@@ -72,15 +88,14 @@ export const Profile = (props) => {
         <div className='form-control'>
           <label htmlFor='text'>Confirm New Password</label>
           <input
-            type='text'
+            type='password'
             name='confirmNewPassword'
             value={confirmNewPassword}
             onChange={onChange}
           />
         </div>
         <button className='btn'>
-          <i className='fas fa-save'></i>
-          Save
+          <i className='fas fa-save'></i> Save
         </button>
       </form>
     </>

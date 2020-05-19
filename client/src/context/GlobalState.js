@@ -189,8 +189,10 @@ export const GlobalProvider = ({ children }) => {
         type: 'REGISTER_SUCCESS',
         payload: res.data,
       });
+      setAlert('Account created successfully.', 'success');
       loadUser();
     } catch (err) {
+      setAlert(err.response.data.error, 'danger');
       dispatch({
         type: 'AUTH_ERROR',
         payload: err.response.data.error,
