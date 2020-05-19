@@ -12,7 +12,6 @@ export const Profile = (props) => {
   const { oldPassword, newPassword, confirmNewPassword } = user;
 
   useEffect(() => {
-    console.log('use effect profile');
     loadUser();
   }, []);
 
@@ -42,9 +41,6 @@ export const Profile = (props) => {
     }
 
     changePassword({ oldPassword, newPassword });
-    setTimeout(() => {
-      props.history.push('/');
-    }, 3000);
   };
 
   return (
@@ -62,7 +58,6 @@ export const Profile = (props) => {
             name='oldPassword'
             value={oldPassword}
             onChange={onChange}
-            placeholder=''
           />
         </div>
         <div className='form-control'>
@@ -72,7 +67,6 @@ export const Profile = (props) => {
             name='newPassword'
             value={newPassword}
             onChange={onChange}
-            placeholder=''
           />
         </div>
         <div className='form-control'>
@@ -82,7 +76,6 @@ export const Profile = (props) => {
             name='confirmNewPassword'
             value={confirmNewPassword}
             onChange={onChange}
-            placeholder=''
           />
         </div>
         <button className='btn'>

@@ -26,7 +26,7 @@ export const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (user.email === '' || user.password === '') {
-      alert('Please fill in both fields!');
+      setAlert('Please enter a valid email and password.', 'danger');
     } else {
       context.loginUser({ email: user.email, password: user.password });
     }
@@ -54,7 +54,6 @@ export const Login = (props) => {
             name='email'
             value={user.email}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -65,7 +64,6 @@ export const Login = (props) => {
             name='password'
             value={user.password}
             onChange={onChange}
-            required
           />
         </div>
         <input
