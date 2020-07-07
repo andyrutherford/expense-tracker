@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
 
-export const Header = (props) => {
+export const Header = () => {
   const history = useHistory();
   const context = useContext(GlobalContext);
   const { loadUser, logoutUser, isAuthenticated, user, setAlert } = context;
@@ -22,8 +22,10 @@ export const Header = (props) => {
     <>
       <span className='header'>
         <h1>
-          <i className='fas fa-coins'></i>&nbsp;Expense Tracker
+          <i className='fas fa-coins'></i>&nbsp;
+          <Link to='/'>Expense Tracker</Link>
         </h1>
+
         {isAuthenticated && user && (
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <ul>
